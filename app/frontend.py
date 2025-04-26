@@ -81,29 +81,24 @@ def execute_query(natural_language: str) -> Dict[str, Any]:
 def main():
     st.title("DB Chat")
     
-    # Initialize session state
     if "token" not in st.session_state:
         st.session_state.token = None
     if "username" not in st.session_state:
         st.session_state.username = None
     
-    # Show authentication page if not logged in
     if not st.session_state.token:
         show_auth_page()
         return
     
-    # Show logged in user
     st.sidebar.write(f"Logged in as: {st.session_state.username}")
     if st.sidebar.button("Logout"):
         st.session_state.token = None
         st.session_state.username = None
         st.rerun()
     
-    # Sidebar for database connection
     with st.sidebar:
         st.header("Database Connection")
         
-        # Saved connection strings
         connection_strings = get_connection_strings()
         if connection_strings:
             st.subheader("Saved Connections")
@@ -112,7 +107,6 @@ def main():
                     if connect_to_database(conn['database_type'], conn["connection_string"]):
                         st.success("Connected successfully!")
         
-        # New connection
         st.subheader("New Connection")
         db_type = st.selectbox(
             "Database Type",
@@ -141,7 +135,6 @@ def main():
             if disconnect_from_database():
                 st.success("Disconnected successfully!")
     
-    # Main content area
     if st.button("Get Schema"):
         schema = get_schema()
         if schema:

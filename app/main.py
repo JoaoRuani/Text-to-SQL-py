@@ -173,11 +173,7 @@ async def execute_query(request: QueryRequest):
     try:
         service = db_manager.get_current_service()
         schema = await service.get_schema()
-        
-        # Generate SQL query using AI
         sql_query = await ai_service.generate_sql_query(request.natural_language, schema, service.database_type)
-        
-        # Execute the query
         results = await service.execute_query(sql_query)
         
         return {

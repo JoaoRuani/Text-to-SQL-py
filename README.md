@@ -157,3 +157,8 @@ docker-compose up --build
 - `API_BASE_URL`: Backend API URL
 - `OLLAMA_ENDPOINT`: Ollama service URL
 - `OLLAMA_MODEL`: AI model to use (default: llama3.2)
+
+### Example Connections
+
+sakila_user:sakila_password@localhost/sakila
+postgres:123456@localhost:5433/postgres

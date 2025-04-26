@@ -93,16 +93,13 @@ def show_auth_page():
     if "show_login" not in st.session_state:
         st.session_state.show_login = True
     
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        if st.session_state.show_login:
-            show_login_form()
-            if st.button("Don't have an account? Register"):
-                st.session_state.show_login = False
-                st.rerun()
-        else:
-            show_register_form()
-            if st.button("Already have an account? Login"):
-                st.session_state.show_login = True
-                st.rerun() 
+    if st.session_state.show_login:
+        show_login_form()
+        if st.button("Don't have an account? Register"):
+            st.session_state.show_login = False
+            st.rerun()
+    else:
+        show_register_form()
+        if st.button("Already have an account? Login"):
+            st.session_state.show_login = True
+            st.rerun() 
